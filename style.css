@@ -1,0 +1,40 @@
+body {
+	text-align: center;
+	margin: 20px;
+}
+
+button,
+input {
+	margin: 5px;
+}
+
+table {
+	margin: auto;
+}
+
+#rank th,
+#rank td {
+	padding: 0px 5px;
+}
+
+#rank {
+	background-color: #999;
+}
+
+#rank th:nth-of-type(2n+1) {
+	background-color: #bbb;
+}
+
+#rank th:nth-of-type(2n) {
+	background-color: #ccc;
+}
+
+#rank tr:nth-of-type(2n) td:nth-of-type(2n),
+#rank tr:nth-of-type(2n+1) td:nth-of-type(2n+1) {
+	background-color: #ddd;
+}
+
+#rank tr:nth-of-type(2n) td:nth-of-type(2n+1),
+#rank tr:nth-of-type(2n+1) td:nth-of-type(2n) {
+	background-color: #eee;
+}
