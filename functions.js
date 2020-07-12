@@ -224,7 +224,7 @@ function settle() {
 	if (gameList.length > 0) {
 		newGame();
 	} else {
-		const max = players[0].points
+		const max = players[0].points;
 		document.body.innerHTML = "";
 		const head = document.createElement("h1");
 		const winners = players.filter(x => x.points == max);
