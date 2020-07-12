@@ -224,10 +224,11 @@ function settle() {
 	if (gameList.length > 0) {
 		newGame();
 	} else {
+		const max = players[0].points
 		const table = createRankTable();
 		document.body.innerHTML = "";
 		const head = document.createElement("h1");
-		const winners = players.filter(x => x.rank == 1);
+		const winners = players.filter(x => x.points == max);
 		var headerText = "";
 		winners.forEach(function (item, i, arr) {
 			headerText += item.name;
