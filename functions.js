@@ -225,7 +225,6 @@ function settle() {
 		newGame();
 	} else {
 		const max = players[0].points
-		const table = createRankTable();
 		document.body.innerHTML = "";
 		const head = document.createElement("h1");
 		const winners = players.filter(x => x.points == max);
@@ -244,7 +243,7 @@ function settle() {
 		document.body.appendChild(createButton("Continue", () => loadGameList()));
 		document.body.appendChild(createButton("Reset", () => resetGame()));
 		document.body.appendChild(createButton("Reload", () => reloadGame()));
-		document.body.appendChild(table);
+		document.body.appendChild(createRankTable());
 	}
 }
 
