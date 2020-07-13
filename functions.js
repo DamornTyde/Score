@@ -143,10 +143,10 @@ function loadGameList() {
 			});
 		}
 	}
-	newGame();
+	newGame(true);
 }
 
-function newGame() {
+function newGame(r) {
 	document.body.innerHTML = "";
 	const game = Math.floor(Math.random() * gameList.length);
 	const coinFlip = Math.floor(Math.random() * 2);
@@ -158,6 +158,9 @@ function newGame() {
 	} else {
 		p1 = gameList[game].p2;
 		p2 = gameList[game].p1;
+	}
+	if (r) {
+		document.body.appendChild(createButton("Random score", () => randomScore()));
 	}
 	const head = document.createElement("h1");
 	head.appendChild(document.createTextNode(`${p1} VS ${p2}`));
@@ -222,7 +225,7 @@ function givePrice(player, price) {
 
 function settle() {
 	if (gameList.length > 0) {
-		newGame();
+		newGame(false);
 	} else {
 		const max = players[0].points;
 		document.body.innerHTML = "";
@@ -258,4 +261,20 @@ function resetGame() {
 function reloadGame() {
 	players.splice(0, players.length);
 	newMatch();
+}
+
+function randomScore() {
+	document.querySelector("button").remove();
+	requestAnimationFrame(randomClick());
+}
+
+function randomClick() {
+	const temp = document.querySelectorAll("button");
+	const score = Math.floor(Math.random() * temp.length);
+	temp[score].click();
+	setTimeout(function() {
+		if (gameList.length > 0) {
+			requestAnimationFrame(randomClick());
+		}
+	}, 100);
 }
