@@ -279,8 +279,6 @@ function randomClick() {
 			endGame(lose, win);
 	}
 	if (game) {
-		setTimeout(function () {
-			requestAnimationFrame(randomClick);
-		}, 10);
+		setTimeout(randomClick, 20);
 	}
 }

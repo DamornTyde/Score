@@ -21,20 +21,20 @@ table {
 	background-color: #999;
 }
 
-#rank th:nth-of-type(2n+1) {
+#rank th:nth-of-type(odd) {
 	background-color: #bbb;
 }
 
-#rank th:nth-of-type(2n) {
+#rank th:nth-of-type(even) {
 	background-color: #ccc;
 }
 
-#rank tr:nth-of-type(2n) td:nth-of-type(2n),
-#rank tr:nth-of-type(2n+1) td:nth-of-type(2n+1) {
+#rank tr:nth-of-type(even) td:nth-of-type(even),
+#rank tr:nth-of-type(odd) td:nth-of-type(odd) {
 	background-color: #ddd;
 }
 
-#rank tr:nth-of-type(2n) td:nth-of-type(2n+1),
-#rank tr:nth-of-type(2n+1) td:nth-of-type(2n) {
+#rank tr:nth-of-type(even) td:nth-of-type(odd),
+#rank tr:nth-of-type(odd) td:nth-of-type(even) {
 	background-color: #eee;
 }
