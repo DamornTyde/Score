@@ -3,6 +3,9 @@ var gameList = [];
 var win;
 var draw;
 var lose;
+var p1;
+var p2;
+var game = false;
 
 newMatch();
 
@@ -143,6 +146,7 @@ function loadGameList() {
 			});
 		}
 	}
+	game = true;
 	newGame(true);
 }
 
@@ -150,8 +154,6 @@ function newGame(r) {
 	document.body.innerHTML = "";
 	const game = Math.floor(Math.random() * gameList.length);
 	const coinFlip = Math.floor(Math.random() * 2);
-	var p1;
-	var p2;
 	if (coinFlip == 0) {
 		p1 = gameList[game].p1;
 		p2 = gameList[game].p2;
@@ -160,14 +162,14 @@ function newGame(r) {
 		p2 = gameList[game].p1;
 	}
 	if (r) {
-		document.body.appendChild(createButton("Random score", () => randomScore()));
+		document.body.appendChild(createButton("Random score", () => randomClick()));
 	}
 	const head = document.createElement("h1");
 	head.appendChild(document.createTextNode(`${p1} VS ${p2}`));
 	document.body.appendChild(head);
-	document.body.appendChild(createButton(`${p1} wins`, () => endGame(p1, p2, win, lose)));
-	document.body.appendChild(createButton("draw", () => endGame(p1, p2, draw, draw)));
-	document.body.appendChild(createButton(`${p2} wins`, () => endGame(p1, p2, lose, win)));
+	document.body.appendChild(createButton(`${p1} wins`, () => endGame(win, lose)));
+	document.body.appendChild(createButton("draw", () => endGame(draw, draw)));
+	document.body.appendChild(createButton(`${p2} wins`, () => endGame(lose, win)));
 	document.body.appendChild(createRankTable());
 	gameList.splice(game, 1);
 }
@@ -202,7 +204,7 @@ function createRankTable() {
 	return table;
 }
 
-function endGame(p1, p2, price1, price2) {
+function endGame(price1, price2) {
 	givePrice(p1, price1);
 	givePrice(p2, price2);
 	settle();
@@ -227,6 +229,7 @@ function settle() {
 	if (gameList.length > 0) {
 		newGame(false);
 	} else {
+		game = false;
 		const max = players[0].points;
 		document.body.innerHTML = "";
 		const head = document.createElement("h1");
@@ -263,18 +266,21 @@ function reloadGame() {
 	newMatch();
 }
 
-function randomScore() {
-	document.querySelector("button").remove();
-	requestAnimationFrame(randomClick());
-}
-
 function randomClick() {
-	const temp = document.querySelectorAll("button");
-	const score = Math.floor(Math.random() * temp.length);
-	temp[score].click();
-	setTimeout(function() {
-		if (gameList.length > 0) {
-			requestAnimationFrame(randomClick());
-		}
-	}, 100);
+	const score = Math.floor(Math.random() * 3);
+	switch (score) {
+		case 0:
+			endGame(win, lose);
+			break;
+		case 1:
+			endGame(draw, draw);
+			break;
+		case 2:
+			endGame(lose, win);
+	}
+	if (game) {
+		setTimeout(function () {
+			requestAnimationFrame(randomClick);
+		}, 10);
+	}
 }
