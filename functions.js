@@ -127,24 +127,35 @@ function setRules() {
 	document.body.appendChild(document.createElement("br"));
 	document.body.appendChild(createInput("lose", "Points for losing", "number"));
 	document.body.appendChild(document.createElement("br"));
+	document.body.appendChild(createInput("base", "Points Everyone starts with", "number"));
+	document.body.appendChild(document.createElement("br"));
 	document.body.appendChild(createButton("Start Games", () => startGames()));
 }
 
 function startGames() {
+	var base;
 	const winValue = document.getElementById("win").value;
 	const drawValue = document.getElementById("draw").value;
 	const loseValue = document.getElementById("lose").value;
-	if (winValue.length == 0 || drawValue.length == 0 || loseValue.length == 0) {
+	const baseValue = document.getElementById("base").value;
+	if (winValue.length == 0 || drawValue.length == 0 || loseValue.length == 0 || baseValue.length == 0) {
 		alert("Please fill in the points you want to give in any situation");
 	} else {
 		if (foolsday) {
 			win = -Number(winValue);
 			draw = -Number(drawValue);
 			lose = -Number(loseValue);
+			base = -Number(baseValue);
 		} else {
 			win = Number(winValue);
 			draw = Number(drawValue);
 			lose = Number(loseValue);
+			base = Number(baseValue);
+		}	
+		if (base != 0) {
+			players.forEach(function(item) {
+				item.points += base;
+			});
 		}
 		loadGameList();
 	}
