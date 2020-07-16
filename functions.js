@@ -154,7 +154,7 @@ function startGames() {
 		}	
 		if (base != 0) {
 			players.forEach(function(item) {
-				item.points += base;
+				item.points = base;
 			});
 		}
 		loadGameList();
