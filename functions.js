@@ -138,9 +138,9 @@ function startGames() {
 		alert("Please fill in the points you want to give in any situation");
 	} else {
 		if (foolsday) {
-			win = Number(-winValue);
-			draw = Number(-drawValue);
-			lose = Number(-loseValue);
+			win = -Number(winValue);
+			draw = -Number(drawValue);
+			lose = -Number(loseValue);
 		} else {
 			win = Number(winValue);
 			draw = Number(drawValue);
