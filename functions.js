@@ -6,6 +6,13 @@ var lose;
 var p1;
 var p2;
 var game = false;
+var foolsday = false;
+
+const now = new Date();
+
+if (now.getDay() == 1 && now.getMonth() == 3) {
+	foolsday = true;
+}
 
 newMatch();
 
@@ -130,9 +137,15 @@ function startGames() {
 	if (winValue.length == 0 || drawValue.length == 0 || loseValue.length == 0) {
 		alert("Please fill in the points you want to give in any situation");
 	} else {
-		win = Number(winValue);
-		draw = Number(drawValue);
-		lose = Number(loseValue);
+		if (foolsday) {
+			win = Number(-winValue);
+			draw = Number(-drawValue);
+			lose = Number(-loseValue);
+		} else {
+			win = Number(winValue);
+			draw = Number(drawValue);
+			lose = Number(loseValue);
+		}
 		loadGameList();
 	}
 }
